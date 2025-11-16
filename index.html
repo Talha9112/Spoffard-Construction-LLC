@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional construction services delivering quality building, renovation, and contracting solutions. Expert construction company serving residential and commercial projects.">
+    <meta name="keywords" content="construction company, building services, renovation, contractors, commercial construction, residential construction, remodeling">
+    <meta name="author" content="BuildPro Construction">
+    <meta property="og:title" content="BuildPro Construction - Expert Building & Renovation Services">
+    <meta property="og:description" content="Quality construction services for residential and commercial projects">
+    <meta property="og:type" content="website">
+    <title>BuildPro Construction - Expert Building & Renovation Services</title>
+    
+    <style>
+        /* ========== RESET & VARIABLES ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-blue: #2A93C7;
+            --secondary-gray: #698D80;
+            --black: #000000;
+            --white: #ffffff;
+            --light-bg: #f5f7fa;
+            --text-dark: #2c3e50;
+            --text-light: #5a6c7d;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background: var(--white);
+        }
+        
+        /* ========== NAVIGATION ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+            z-index: 1000;
+            padding: 1.2rem 0;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo span {
+            color: var(--secondary-gray);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .nav-menu a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            letter-spacing: 0.3px;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary-blue);
+        }
+        
+        .nav-cta {
+            background: var(--primary-blue);
+            color: var(--white) !important;
+            padding: 0.7rem 1.8rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-cta:hover {
+            background: var(--secondary-gray);
+            transform: translateY(-2px);
+        }
+        
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+        
+        .mobile-toggle span {
+            width: 28px;
+            height: 3px;
+            background: var(--primary-blue);
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+        
+        /* ========== HERO SECTION ========== */
+        .hero {
+            margin-top: 80px;
+            min-height: 90vh;
+            background: linear-gradient(135deg, rgba(42, 147, 199, 0.95) 0%, rgba(105, 141, 128, 0.95) 100%),
+                        url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="white" opacity="0.1"/></svg>');
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+        }
+        
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-text h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+        
+        .hero-text h1 span {
+            display: block;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .hero-text p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            padding: 1.1rem 2.5rem;
+            background: var(--white);
+            color: var(--primary-blue);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .btn-secondary {
+            padding: 1.1rem 2.5rem;
+            background: transparent;
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            border: 2px solid var(--white);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary-blue);
+        }
+        
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--white);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+        
+        /* ========== SERVICES SECTION ========== */
+        .services {
+            padding: 7rem 3rem;
+            background: var(--white);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+        
+        .section-tag {
+            display: inline-block;
+            color: var(--primary-blue);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+        
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .section-header p {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+        
+        .service-card {
+            background: var(--white);
+            border: 2px solid #e8ecef;
+            border-radius: 12px;
+            padding: 3rem 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--secondary-gray));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-color: var(--primary-blue);
+        }
+        
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .service-card p {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-link {
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+        
+        .service-link:hover {
+            gap: 1rem;
+        }
+        
+        /* ========== PROJECTS SHOWCASE ========== */
+        .projects {
+            padding: 7rem 3rem;
+            background: var(--light-bg);
+        }
+        
+        .projects-container {
+            position: relative;
+            overflow: hidden;
+            margin-top: 3rem;
+        }
+        
+        .projects-slider {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-blue) #e8ecef;
+            padding-bottom: 2rem;
+        }
+        
+        .projects-slider::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .projects-slider::-webkit-scrollbar-track {
+            background: #e8ecef;
+            border-radius: 10px;
+        }
+        
+        .projects-slider::-webkit-scrollbar-thumb {
+            background: var(--primary-blue);
+            border-radius: 10px;
+        }
+        
+        .projects-slider::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-gray);
+        }
+        
+        .project-card {
+            min-width: 400px;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-gray));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+        
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 2rem;
+            color: var(--white);
+        }
+        
+        .project-overlay h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+        }
+        
+        .project-overlay p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+        }
+        
+        /* Modal Styles */
+        .project-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .project-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: var(--white);
+            color: var(--black);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .modal-close:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+            transform: rotate(90deg);
+        }
+        
+        .modal-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            gap: 1rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-blue) rgba(255,255,255,0.2);
+            padding: 1rem;
+        }
+        
+        .modal-slider::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .modal-slider::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+        }
+        
+        .modal-slider::-webkit-scrollbar-thumb {
+            background: var(--primary-blue);
+            border-radius: 10px;
+        }
+        
+        .modal-image {
+            min-width: 70vw;
+            height: 70vh;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-gray));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--black);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .modal-nav:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+        
+        .modal-nav.prev {
+            left: 20px;
+        }
+        
+        .modal-nav.next {
+            right: 20px;
+        }
+        
+        .modal-info {
+            text-align: center;
+            color: var(--white);
+            margin-top: 1.5rem;
+        }
+        
+        .modal-info h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+        }
+        
+        .modal-info p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* ========== WHY CHOOSE US ========== */
+        .why-us {
+            padding: 7rem 3rem;
+            background: var(--white);
+        }
+        
+        .why-us-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+        
+        .why-us-image {
+            height: 500px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-gray));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 600;
+            box-shadow: 0 20px 60px rgba(42, 147, 199, 0.3);
+        }
+        
+        .why-us-text h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+        
+        .feature-list {
+            list-style: none;
+        }
+        
+        .feature-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            align-items: start;
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-gray));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .feature-content h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-content p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        
+        /* ========== TESTIMONIALS ========== */
+        .testimonials {
+            padding: 7rem 3rem;
+            background: var(--light-bg);
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .testimonial-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+        
+        .stars {
+            color: #ffa500;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-text {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-gray));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+        }
+        
+        .author-info h5 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        
+        .author-info p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        /* ========== CONTACT SECTION ========== */
+        .contact {
+            padding: 7rem 3rem;
+            background: var(--white);
+        }
+        
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .contact-info-box {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-gray));
+            padding: 4rem;
+            border-radius: 20px;
+            color: var(--white);
+        }
+        
+        .contact-info-box h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+        
+        .contact-info-box p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+        }
+        
+        .info-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            align-items: start;
+        }
+        
+        .info-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        
+        .info-text strong {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .info-text span {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.95rem;
+        }
+        
+        .contact-form {
+            background: var(--white);
+        }
+        
+        .contact-form h3 {
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.7rem;
+            font-size: 0.95rem;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 2px solid #e8ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(42, 147, 199, 0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background: var(--secondary-gray);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(42, 147, 199, 0.3);
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        /* ========== FOOTER ========== */
+        footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 5rem 3rem 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-about h3 {
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: var(--primary-blue);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .social-links a:hover {
+            background: var(--secondary-gray);
+            transform: translateY(-3px);
+        }
+        
+        .footer-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-section ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section ul li a:hover {
+            color: var(--primary-blue);
+        }
+        
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* ========== RESPONSIVE DESIGN ========== */
+        @media (max-width: 1200px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .project-card {
+                min-width: 350px;
+            }
+        }
+        
+        @media (max-width: 968px) {
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--white);
+                flex-direction: column;
+                justify-content: center;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+                transition: left 0.3s ease;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .mobile-toggle {
+                display: flex;
+            }
+            
+            .hero-content {
+                grid-template-columns: 1fr;
+                padding: 3rem 2rem;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .why-us-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .nav-container {
+                padding: 0 1.5rem;
+            }
+            
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .project-card {
+                min-width: 300px;
+                height: 250px;
+            }
+            
+            .modal-image {
+                min-width: 90vw;
+                height: 60vh;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .services,
+            .projects,
+            .why-us,
+            .testimonials,
+            .contact {
+                padding: 4rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">Build<span>Pro</span></a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact" class="nav-cta">Get Quote</a></li>
+            </ul>
+            <div class="mobile-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>
+                    Building Tomorrow,
+                    <span>Today</span>
+                </h1>
+                <p>Expert construction services for residential and commercial projects. We bring your vision to life with quality craftsmanship, innovative solutions, and unwavering commitment to excellence.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn-primary">Start Your Project</a>
+                    <a href="#projects" class="btn-secondary">View Our Work</a>
+                </div>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Projects Completed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">98%</span>
+                    <span class="stat-label">Client Satisfaction</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">OUR SERVICES</span>
+                <h2>Comprehensive Construction Solutions</h2>
+                <p>From ground-breaking to final touches, we deliver excellence across all aspects of construction and renovation.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="service-icon">🔨</span>
+                    <h3>Renovation & Remodeling</h3>
+                    <p>Transform your existing space with our expert renovation services. We modernize homes and businesses while maintaining structural integrity.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">🏢</span>
+                    <h3>Commercial Projects</h3>
+                    <p>Specialized commercial construction including office buildings, retail spaces, warehouses, and multi-unit developments.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">🏠</span>
+                    <h3>Residential Building</h3>
+                    <p>Custom home construction and residential developments. We create dream homes tailored to your lifestyle and preferences.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">🛠️</span>
+                    <h3>Repairs & Maintenance</h3>
+                    <p>Professional repair services and ongoing maintenance to keep your property in optimal condition year-round.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">📐</span>
+                    <h3>Design & Planning</h3>
+                    <p>Comprehensive project planning, architectural design, and engineering consultation to bring your vision to reality.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS SHOWCASE -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">OUR PORTFOLIO</span>
+                <h2>Featured Projects</h2>
+                <p>Explore our recent completed projects showcasing quality workmanship and innovative construction solutions.</p>
+            </div>
+            <div class="projects-container">
+                <div class="projects-slider" id="projectsSlider">
+                    <div class="project-card" data-project="0">
+                        <div class="project-image">[Custom Home Image 1]</div>
+                        <div class="project-overlay">
+                            <h3>Modern Family Home</h3>
+                            <p>3,500 sq ft custom home with open floor plan and premium finishes.</p>
+                        </div>
+                    </div>
+                    <div class="project-card" data-project="1">
+                        <div class="project-image">[Kitchen Remodel Image]</div>
+                        <div class="project-overlay">
+                            <h3>Luxury Kitchen Renovation</h3>
+                            <p>Complete kitchen transformation with custom cabinetry and modern appliances.</p>
+                        </div>
+                    </div>
+                    <div class="project-card" data-project="2">
+                        <div class="project-image">[Deck Construction Image]</div>
+                        <div class="project-overlay">
+                            <h3>Outdoor Living Space</h3>
+                            <p>Beautiful composite deck with built-in seating and lighting.</p>
+                        </div>
+                    </div>
+                    <div class="project-card" data-project="3">
+                        <div class="project-image">[Commercial Building Image]</div>
+                        <div class="project-overlay">
+                            <h3>Office Building Renovation</h3>
+                            <p>Complete commercial space remodel with modern amenities.</p>
+                        </div>
+                    </div>
+                    <div class="project-card" data-project="4">
+                        <div class="project-image">[Home Addition Image]</div>
+                        <div class="project-overlay">
+                            <h3>Two-Story Addition</h3>
+                            <p>Seamless home expansion adding 1,200 sq ft of living space.</p>
+                        </div>
+                    </div>
+                    <div class="project-card" data-project="5">
+                        <div class="project-image">[Bathroom Remodel Image]</div>
+                        <div class="project-overlay">
+                            <h3>Master Bathroom Suite</h3>
+                            <p>Spa-like bathroom featuring marble tile and custom fixtures.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECT MODAL -->
+    <div class="project-modal" id="projectModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">×</button>
+            <button class="modal-nav prev" id="modalPrev">‹</button>
+            <button class="modal-nav next" id="modalNext">›</button>
+            <div class="modal-slider" id="modalSlider">
+                <!-- Images will be loaded here dynamically -->
+            </div>
+            <div class="modal-info" id="modalInfo">
+                <h3></h3>
+                <p></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- WHY CHOOSE US -->
+    <section class="why-us" id="about">
+        <div class="container">
+            <div class="why-us-content">
+                <div class="why-us-image">
+                    [Construction Team Image Placeholder]
+                </div>
+                <div class="why-us-text">
+                    <span class="section-tag">WHY CHOOSE US</span>
+                    <h2>Building Excellence Through Experience</h2>
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <div class="feature-icon">✓</div>
+                            <div class="feature-content">
+                                <h4>Licensed & Insured</h4>
+                                <p>Fully licensed, bonded, and insured contractors with comprehensive coverage for your peace of mind.</p>
+                            </div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-icon">⭐</div>
+                            <div class="feature-content">
+                                <h4>Quality Craftsmanship</h4>
+                                <p>Our skilled team delivers superior workmanship using premium materials and proven construction techniques.</p>
+                            </div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-icon">⏱️</div>
+                            <div class="feature-content">
+                                <h4>On-Time Delivery</h4>
+                                <p>We respect your timeline and budget, consistently completing projects on schedule without compromising quality.</p>
+                            </div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-icon">💼</div>
+                            <div class="feature-content">
+                                <h4>Project Management</h4>
+                                <p>Dedicated project managers ensure seamless coordination, communication, and execution from start to finish.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">TESTIMONIALS</span>
+                <h2>What Our Clients Say</h2>
+                <p>Don't just take our word for it—hear from satisfied clients who've experienced our commitment to excellence.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"BuildPro transformed our outdated office into a modern workspace. Their attention to detail and professionalism exceeded our expectations. Highly recommend!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JD</div>
+                        <div class="author-info">
+                            <h5>John Davidson</h5>
+                            <p>CEO, Tech Solutions Inc.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"From design to completion, BuildPro made our dream home a reality. The team was responsive, skilled, and delivered exceptional quality work."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-info">
+                            <h5>Sarah Mitchell</h5>
+                            <p>Homeowner</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Outstanding construction services! They completed our commercial project ahead of schedule and within budget. True professionals in every sense."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RJ</div>
+                        <div class="author-info">
+                            <h5>Robert Johnson</h5>
+                            <p>Property Developer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">GET IN TOUCH</span>
+                <h2>Start Your Project Today</h2>
+                <p>Ready to build something amazing? Contact us for a free consultation and quote.</p>
+            </div>
+            <div class="contact-wrapper">
+                <div class="contact-info-box">
+                    <h3>Let's Discuss Your Project</h3>
+                    <p>Our team is ready to help you bring your construction vision to life. Reach out today for expert guidance and competitive pricing.</p>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div class="info-text">
+                            <strong>Visit Our Office</strong>
+                            <span>Franklin, NH 03235<br>United States</span>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">📞</div>
+                        <div class="info-text">
+                            <strong>Call Us</strong>
+                            <span>Contact for quote<br>Mon-Fri: 7AM - 6PM<br>Sat: 8AM - 2PM</span>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">✉️</div>
+                        <div class="info-text">
+                            <strong>Email Us</strong>
+                            <span>info@spoffordconstruction.com</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="contact-form" id="contactForm">
+                    <h3>Request a Free Quote</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                            <span class="error-message" id="firstNameError">Please enter your first name</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                            <span class="error-message" id="lastNameError">Please enter your last name</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                            <span class="error-message" id="emailError">Please enter a valid email</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                            <span class="error-message" id="phoneError">Please enter your phone number</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectType">Project Type</label>
+                        <input type="text" id="projectType" name="projectType" placeholder="e.g., New Construction, Renovation, etc.">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Project Details *</label>
+                        <textarea id="message" name="message" required placeholder="Tell us about your project..."></textarea>
+                        <span class="error-message" id="messageError">Please describe your project</span>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Get Free Quote</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <h3>Spofford Construction LLC</h3>
+                <p>Leading construction company in Franklin, NH delivering excellence in building, renovation, and contracting services. With over 15 years of experience, we're your trusted partner in construction.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="Twitter">𝕏</a>
+                    <a href="#" aria-label="LinkedIn">in</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#services">New Construction</a></li>
+                    <li><a href="#services">Renovation</a></li>
+                    <li><a href="#services">Commercial Projects</a></li>
+                    <li><a href="#services">Residential Building</a></li>
+                    <li><a href="#services">Design & Planning</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Business Hours</h4>
+                <ul>
+                    <li>Monday - Friday</li>
+                    <li>7:00 AM - 6:00 PM</li>
+                    <li>Saturday</li>
+                    <li>8:00 AM - 2:00 PM</li>
+                    <li>Sunday: Closed</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Spofford Construction LLC. All Rights Reserved. | <a href="#" style="color: rgba(255,255,255,0.6);">Privacy Policy</a> | <a href="#" style="color: rgba(255,255,255,0.6);">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Project data with multiple images
+        const projectsData = [
+            {
+                title: 'Modern Family Home',
+                description: '3,500 sq ft custom home with open floor plan and premium finishes.',
+                images: [
+                    '[Front Exterior View]',
+                    '[Living Room Interior]',
+                    '[Kitchen View]',
+                    '[Master Bedroom]',
+                    '[Backyard View]'
+                ]
+            },
+            {
+                title: 'Luxury Kitchen Renovation',
+                description: 'Complete kitchen transformation with custom cabinetry and modern appliances.',
+                images: [
+                    '[Kitchen Before]',
+                    '[Kitchen After - Main View]',
+                    '[Kitchen Island Detail]',
+                    '[Custom Cabinetry]',
+                    '[Lighting and Fixtures]'
+                ]
+            },
+            {
+                title: 'Outdoor Living Space',
+                description: 'Beautiful composite deck with built-in seating and lighting.',
+                images: [
+                    '[Deck Overview]',
+                    '[Built-in Seating]',
+                    '[Lighting at Night]',
+                    '[Railing Detail]',
+                    '[Connection to Home]'
+                ]
+            },
+            {
+                title: 'Office Building Renovation',
+                description: 'Complete commercial space remodel with modern amenities.',
+                images: [
+                    '[Building Exterior]',
+                    '[Lobby Area]',
+                    '[Office Space 1]',
+                    '[Office Space 2]',
+                    '[Conference Room]'
+                ]
+            },
+            {
+                title: 'Two-Story Addition',
+                description: 'Seamless home expansion adding 1,200 sq ft of living space.',
+                images: [
+                    '[Addition Exterior]',
+                    '[New Living Area]',
+                    '[Upstairs Bedroom]',
+                    '[Bathroom Addition]',
+                    '[Staircase Detail]'
+                ]
+            },
+            {
+                title: 'Master Bathroom Suite',
+                description: 'Spa-like bathroom featuring marble tile and custom fixtures.',
+                images: [
+                    '[Bathroom Overview]',
+                    '[Custom Vanity]',
+                    '[Walk-in Shower]',
+                    '[Soaking Tub]',
+                    '[Tile Detail]'
+                ]
+            }
+        ];
+
+        // Mobile Menu Toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Project Modal Functionality
+        const projectModal = document.getElementById('projectModal');
+        const modalClose = document.getElementById('modalClose');
+        const modalSlider = document.getElementById('modalSlider');
+        const modalInfo = document.getElementById('modalInfo');
+        const modalPrev = document.getElementById('modalPrev');
+        const modalNext = document.getElementById('modalNext');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        let currentProject = 0;
+
+        // Open modal when project card is clicked
+        projectCards.forEach(card => {
+            card.addEventListener('click', () => {
+                currentProject = parseInt(card.getAttribute('data-project'));
+                openModal(currentProject);
+            });
+        });
+
+        function openModal(projectIndex) {
+            const project = projectsData[projectIndex];
+            
+            // Update modal info
+            modalInfo.querySelector('h3').textContent = project.title;
+            modalInfo.querySelector('p').textContent = project.description;
+            
+            // Clear and populate slider
+            modalSlider.innerHTML = '';
+            project.images.forEach(image => {
+                const imgDiv = document.createElement('div');
+                imgDiv.className = 'modal-image';
+                imgDiv.textContent = image;
+                modalSlider.appendChild(imgDiv);
+            });
+            
+            projectModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal
+        modalClose.addEventListener('click', closeModal);
+        projectModal.addEventListener('click', (e) => {
+            if (e.target === projectModal) {
+                closeModal();
+            }
+        });
+
+        function closeModal() {
+            projectModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Navigate between projects
+        modalPrev.addEventListener('click', () => {
+            currentProject = (currentProject - 1 + projectsData.length) % projectsData.length;
+            openModal(currentProject);
+        });
+
+        modalNext.addEventListener('click', () => {
+            currentProject = (currentProject + 1) % projectsData.length;
+            openModal(currentProject);
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (projectModal.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                } else if (e.key === 'ArrowLeft') {
+                    modalPrev.click();
+                } else if (e.key === 'ArrowRight') {
+                    modalNext.click();
+                }
+            }
+        });
+        
+        // Form Validation
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            let isValid = true;
+            
+            // First Name Validation
+            const firstName = document.getElementById('firstName');
+            const firstNameError = document.getElementById('firstNameError');
+            if (firstName.value.trim() === '') {
+                firstNameError.style.display = 'block';
+                firstName.style.borderColor = '#e74c3c';
+                isValid = false;
+            } else {
+                firstNameError.style.display = 'none';
+                firstName.style.borderColor = '#e8ecef';
+            }
+            
+            // Last Name Validation
+            const lastName = document.getElementById('lastName');
+            const lastNameError = document.getElementById('lastNameError');
+            if (lastName.value.trim() === '') {
+                lastNameError.style.display = 'block';
+                lastName.style.borderColor = '#e74c3c';
+                isValid = false;
+            } else {
+                lastNameError.style.display = 'none';
+                lastName.style.borderColor = '#e8ecef';
+            }
+            
+            // Email Validation
+            const email = document.getElementById('email');
+            const emailError = document.getElementById('emailError');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.value.trim())) {
+                emailError.style.display = 'block';
+                email.style.borderColor = '#e74c3c';
+                isValid = false;
+            } else {
+                emailError.style.display = 'none';
+                email.style.borderColor = '#e8ecef';
+            }
+            
+            // Phone Validation
+            const phone = document.getElementById('phone');
+            const phoneError = document.getElementById('phoneError');
+            if (phone.value.trim() === '') {
+                phoneError.style.display = 'block';
+                phone.style.borderColor = '#e74c3c';
+                isValid = false;
+            } else {
+                phoneError.style.display = 'none';
+                phone.style.borderColor = '#e8ecef';
+            }
+            
+            // Message Validation
+            const message = document.getElementById('message');
+            const messageError = document.getElementById('messageError');
+            if (message.value.trim() === '') {
+                messageError.style.display = 'block';
+                message.style.borderColor = '#e74c3c';
+                isValid = false;
+            } else {
+                messageError.style.display = 'none';
+                message.style.borderColor = '#e8ecef';
+            }
+            
+            if (isValid) {
+                alert('Thank you for your inquiry! Our team will contact you within 24 hours to discuss your project.');
+                contactForm.reset();
+            }
+        });
+        
+        // Clear errors on input
+        ['firstName', 'lastName', 'email', 'phone', 'message'].forEach(id => {
+            const element = document.getElementById(id);
+            element.addEventListener('input', function() {
+                this.style.borderColor = '#e8ecef';
+                const errorElement = document.getElementById(id + 'Error');
+                if (errorElement) {
+                    errorElement.style.display = 'none';
+                }
+            });
+        });
+        
+        // Smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

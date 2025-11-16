@@ -1,0 +1,5 @@
+;/*FB_PKG_DELIM*/
+
+__d("CometComposerValidationErrorsContext",["react"],(function(a,b,c,d,e,f,g){"use strict";var h;a=h||d("react");b=a.createContext({});g["default"]=b}),98);
+__d("CometComposerValidatorsContext",["react"],(function(a,b,c,d,e,f,g){"use strict";var h;a=h||d("react");b=a.createContext({});g["default"]=b}),98);
+__d("getComposerValidationErrors",["$InternalEnum"],(function(a,b,c,d,e,f){"use strict";c=b("$InternalEnum").Mirrored(["DEFAULT","NON_BLOCKING_WARNING_MESSAGE"]);function a(a,b){var c={};for(var d in a){var e=a[d].validationModule;e=e(b);e!=null&&(c[d]=e)}return c}f.CometComposerValidationType=c;f.getComposerValidationErrors=a}),66);

@@ -1,0 +1,3 @@
+;/*FB_PKG_DELIM*/
+
+__d("copyrightCheckFailedValidator",["CometVideoEditorCopyrightCheckStrings"],(function(a,b,c,d,e,f,g){"use strict";function a(a){var b=a.mediaAttachments;if(b==null)return null;return b.some(function(a){return a.state!=="UPLOADED"&&a.state!=="PREEXISTING"})?null:a.copyrightPreCheckFailed===!0?d("CometVideoEditorCopyrightCheckStrings").COPYRIGHT_CHECK_IN_FAILED_TEXT:null}g["default"]=a}),98);
