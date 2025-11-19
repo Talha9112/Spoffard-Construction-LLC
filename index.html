@@ -9,11 +9,13 @@
     <meta property="og:title" content="BuildPro Construction - Expert Building & Renovation Services">
     <meta property="og:description" content="Quality construction services for residential and commercial projects">
     <meta property="og:type" content="website">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <title>BuildPro Construction - Expert Building & Renovation Services</title>
     
     <style>
         /* ========== RESET & VARIABLES ========== */
-        * {
+                * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -27,22 +29,54 @@
             --light-bg: #f5f7fa;
             --text-dark: #2c3e50;
             --text-light: #5a6c7d;
+            --animation-duration: 0.85s;
+            --animation-distance: 40px;
         }
         
-        html {
-            scroll-behavior: smooth;
+               html, body {
+            overflow-x: hidden;
+            max-width: 100%;
         }
         
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.7;
-            color: var(--text-dark);
-            background: var(--white);
+        /* ========== GLOBAL ANIMATIONS ========== */
+        [data-animate] {
+            opacity: 0;
+            transform: translate3d(0, var(--animation-distance), 0);
+            transition: opacity var(--animation-duration) ease, transform var(--animation-duration) ease;
+            transition-delay: var(--delay, 0s);
+            will-change: transform, opacity;
+        }
+        
+        [data-animate="right"] {
+            transform: translate3d(var(--animation-distance), 0, 0);
+        }
+        
+        [data-animate="left"] {
+            transform: translate3d(calc(var(--animation-distance) * -1), 0, 0);
+        }
+        
+        [data-animate="scale"] {
+            transform: scale(0.92);
+        }
+        
+        [data-animate].in-view {
+            opacity: 1;
+            transform: translate3d(0, 0, 0) scale(1);
+        }
+        
+        @keyframes floatPulse {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .hero::before {
+            animation: floatPulse 12s ease-in-out infinite;
         }
         
         /* ========== NAVIGATION ========== */
         .navbar {
-            position: static;
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
@@ -126,12 +160,14 @@
         .hero {
             margin-top: 0;
             min-height: 90vh;
+            width: 100%;
             background: linear-gradient(135deg, rgba(42, 147, 199, 0.95) 0%, rgba(105, 141, 128, 0.95) 100%),
                         url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="white" opacity="0.1"/></svg>');
             display: flex;
             align-items: center;
             position: relative;
             overflow: hidden;
+            padding: clamp(3rem, 6vw, 5rem) clamp(1.25rem, 4vw, 3rem);
         }
         
         .hero::before {
@@ -146,12 +182,11 @@
         }
         
         .hero-content {
-            max-width: 1400px;
+            width: min(1200px, 100%);
             margin: 0 auto;
-            padding: 0 3rem;
             display: grid;
             grid-template-columns: 1.2fr 1fr;
-            gap: 5rem;
+            gap: clamp(2rem, 4vw, 5rem);
             align-items: center;
             position: relative;
             z-index: 1;
@@ -256,8 +291,10 @@
         }
         
         .container {
+            width: 100%;
             max-width: 1400px;
             margin: 0 auto;
+            padding: 0 3rem;
         }
         
         .section-header {
@@ -290,76 +327,141 @@
             margin: 0 auto;
         }
         
-        .services-grid {
+        .services-wrapper {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2.5rem;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 3.5rem;
+            align-items: stretch;
         }
         
-        .service-card {
+        .services-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .services-content > p {
+            color: var(--text-light);
+            font-size: 1.05rem;
+        }
+        
+        .services-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .service-item {
+            border: 1px solid #e2e6ea;
+            border-radius: 16px;
+            padding: 1.8rem;
             background: var(--white);
-            border: 2px solid #e8ecef;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            transition: border 0.3s ease, transform 0.3s ease;
+        }
+        
+        .service-item:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-4px);
+        }
+        
+        .service-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        
+        .service-pill span {
+            width: 44px;
+            height: 44px;
             border-radius: 12px;
-            padding: 3rem 2.5rem;
-            transition: all 0.4s ease;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-gray));
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--white);
+        }
+        
+        .service-item p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .service-meta {
+            font-size: 0.9rem;
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+        
+        .services-highlight {
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 24px;
+            background: linear-gradient(160deg, #2A93C7 0%, #698D80 100%);
+            padding: 2.8rem;
+            color: var(--white);
+            box-shadow: 0 30px 70px rgba(42, 147, 199, 0.35);
             position: relative;
             overflow: hidden;
         }
         
-        .service-card::before {
+        .services-highlight::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-blue), var(--secondary-gray));
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
+            width: 180px;
+            height: 180px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            top: -40px;
+            right: -40px;
         }
         
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            border-color: var(--primary-blue);
-        }
-        
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .service-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-        
-        .service-card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
+        .services-highlight h3 {
+            font-size: 2rem;
             margin-bottom: 1rem;
         }
         
-        .service-card p {
-            color: var(--text-light);
-            font-size: 1rem;
+        .services-highlight p {
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 2rem;
             line-height: 1.7;
-            margin-bottom: 1.5rem;
         }
         
-        .service-link {
-            color: var(--primary-blue);
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: gap 0.3s ease;
-        }
-        
-        .service-link:hover {
+        .services-highlight ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
             gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .services-highlight li {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .services-cta {
+            background: var(--white);
+            color: var(--primary-blue);
+            padding: 1rem 1.8rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .services-cta:hover {
+            background: rgba(255,255,255,0.85);
+            transform: translateY(-2px);
         }
         
         /* ========== PROJECTS SHOWCASE ========== */
@@ -368,233 +470,357 @@
             background: var(--light-bg);
         }
         
-        .projects-container {
-            position: relative;
-            overflow: hidden;
-            margin-top: 3rem;
+        .projects-intro {
+            max-width: 750px;
+            margin: 0 auto 3rem;
+            text-align: center;
         }
         
-        .projects-slider {
-            display: flex;
+        .projects-intro p {
+            color: var(--text-light);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary-blue) #e8ecef;
-            padding-bottom: 2rem;
+            margin-bottom: 3rem;
         }
         
-        .projects-slider::-webkit-scrollbar {
-            height: 8px;
-        }
-        
-        .projects-slider::-webkit-scrollbar-track {
-            background: #e8ecef;
-            border-radius: 10px;
-        }
-        
-        .projects-slider::-webkit-scrollbar-thumb {
-            background: var(--primary-blue);
-            border-radius: 10px;
-        }
-        
-        .projects-slider::-webkit-scrollbar-thumb:hover {
-            background: var(--secondary-gray);
-        }
-        
-        .project-card {
-            min-width: 400px;
-            height: 300px;
-            border-radius: 15px;
+        .project-figure {
+            background: var(--white);
+            border-radius: 18px;
             overflow: hidden;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
             position: relative;
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
             transition: transform 0.3s ease;
         }
         
-        .project-card:hover {
-            transform: translateY(-5px);
+        .project-figure:hover {
+            transform: translateY(-6px);
         }
         
-        .project-image {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-gray));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 1.2rem;
-            font-weight: 600;
-            transition: transform 0.5s ease;
-        }
-        
-        .project-card:hover .project-image {
-            transform: scale(1.05);
-        }
-        
-        .project-overlay {
+        .project-figure::before {
+            content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            padding: 2rem;
-            color: var(--white);
-        }
-        
-        .project-overlay h3 {
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-            color: var(--white);
-        }
-        
-        .project-overlay p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.95rem;
-        }
-        
-        /* Modal Styles */
-        .project-modal {
-            display: none;
-            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            height: 60%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-gray));
+            opacity: 0.15;
+        }
+        
+        .project-visual {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-gray));
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            position: relative;
+        }
+        
+        .project-badge {
+            position: absolute;
+            top: 1.2rem;
+            left: 1.2rem;
+            background: rgba(0,0,0,0.5);
+            color: var(--white);
+            padding: 0.4rem 1rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .project-meta {
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        
+        .project-meta h3 {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+        }
+        
+        .project-meta p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        
+        .project-meta span {
+            font-weight: 600;
+            color: var(--primary-blue);
+            font-size: 0.9rem;
+        }
+        
+        .gallery-btn {
+            margin-top: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        .before-after {
+            background: var(--white);
+            border-radius: 22px;
+            padding: 2rem;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.08);
+        }
+        
+        .before-after-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .before-after-inner {
+            position: relative;
+            border-radius: 18px;
+            overflow: hidden;
+            height: 320px;
+            background: #111;
+        }
+        
+        .before-after-image {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .before-after-image.before {
+            background: url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=60') center/cover no-repeat;
+        }
+        
+        .before-after-image.after {
+            background: url('https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=900&q=60') center/cover no-repeat;
+            width: var(--slider-position, 50%);
+            overflow: hidden;
+        }
+        
+        .before-after-image span {
+            background: rgba(0,0,0,0.5);
+            color: var(--white);
+            padding: 0.4rem 1rem;
+            border-radius: 999px;
+        }
+        
+        .before-after-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--white);
+            left: calc(var(--slider-position, 50%) - 1.5px);
+        }
+        
+        .before-after-handle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-blue);
+            border: 4px solid var(--white);
+            box-shadow: 0 10px 20px rgba(42, 147, 199, 0.3);
+        }
+        
+        .before-after-slider {
+            position: absolute;
+            left: 50%;
+            bottom: 18px;
+            transform: translateX(-50%);
+            width: min(70%, 480px);
+            -webkit-appearance: none;
+            appearance: none;
+            height: 6px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.5);
+            outline: none;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+        
+        .before-after-slider::-webkit-slider-thumb,
+        .before-after-slider::-moz-range-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--primary-blue);
+            cursor: pointer;
+            border: 2px solid var(--white);
+            box-shadow: 0 5px 15px rgba(42, 147, 199, 0.3);
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            [data-animate],
+            .hero::before {
+                animation: none !important;
+                transition: none !important;
+                transform: none !important;
+                opacity: 1 !important;
+            }
+            
+            .before-after-slider,
+            .modal-nav,
+            .services-cta,
+            .btn-primary,
+            .btn-secondary,
+            .service-item,
+            .project-figure {
+                transition: none !important;
+            }
+        }
+        
+        /* Project Modal */
+        .project-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
             z-index: 2000;
-            animation: fadeIn 0.3s ease;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
         }
         
         .project-modal.active {
             display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
         
         .modal-content {
-            max-width: 90%;
-            max-height: 90%;
+            width: min(1000px, 95vw);
+            background: #0f1419;
+            border-radius: 20px;
+            padding: 2.5rem;
             position: relative;
+            color: var(--white);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
         }
         
         .modal-close {
             position: absolute;
-            top: -50px;
-            right: 0;
-            background: var(--white);
-            color: var(--black);
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 1.5rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
+            top: 18px;
+            right: 18px;
             border: none;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
         }
         
         .modal-close:hover {
             background: var(--primary-blue);
-            color: var(--white);
-            transform: rotate(90deg);
         }
         
-        .modal-slider {
-            display: flex;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            gap: 1rem;
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary-blue) rgba(255,255,255,0.2);
-            padding: 1rem;
+        .modal-header h3 {
+            font-size: 2rem;
+            margin-bottom: 0.4rem;
         }
         
-        .modal-slider::-webkit-scrollbar {
-            height: 8px;
+        .modal-header p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 1.5rem;
         }
         
-        .modal-slider::-webkit-scrollbar-track {
-            background: rgba(255,255,255,0.2);
-            border-radius: 10px;
-        }
-        
-        .modal-slider::-webkit-scrollbar-thumb {
-            background: var(--primary-blue);
-            border-radius: 10px;
+        .modal-gallery {
+            position: relative;
         }
         
         .modal-image {
-            min-width: 70vw;
-            height: 70vh;
+            width: 100%;
+            height: 420px;
+            border-radius: 18px;
             background: linear-gradient(135deg, var(--primary-blue), var(--secondary-gray));
-            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--white);
-            font-size: 1.5rem;
-            font-weight: 600;
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .modal-nav {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.9);
-            color: var(--black);
-            width: 50px;
-            height: 50px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 1.5rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
             border: none;
+            background: rgba(255,255,255,0.15);
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
         }
         
         .modal-nav:hover {
             background: var(--primary-blue);
-            color: var(--white);
         }
         
         .modal-nav.prev {
-            left: 20px;
+            left: -24px;
         }
         
         .modal-nav.next {
-            right: 20px;
+            right: -24px;
         }
         
-        .modal-info {
-            text-align: center;
-            color: var(--white);
+        .modal-thumbs {
+            display: flex;
+            gap: 0.75rem;
             margin-top: 1.5rem;
+            overflow-x: auto;
         }
         
-        .modal-info h3 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            color: var(--white);
+        .modal-thumb {
+            min-width: 110px;
+            height: 80px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border 0.3s ease;
         }
         
-        .modal-info p {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.8);
+        .modal-thumb.active {
+            border-color: var(--primary-blue);
         }
+        
         
         /* ========== WHY CHOOSE US ========== */
         .why-us {
@@ -747,6 +973,12 @@
             gap: 5rem;
             max-width: 1400px;
             margin: 0 auto;
+        }
+        
+        .map-wrapper {
+            margin-top: 3rem;
+            border-radius: 20px;
+            overflow: hidden;
         }
         
         .contact-info-box {
@@ -923,6 +1155,10 @@
             font-size: 1.2rem;
         }
         
+        .social-links a i {
+            font-size: 1.2rem;
+        }
+        
         .social-links a:hover {
             background: var(--secondary-gray);
             transform: translateY(-3px);
@@ -964,12 +1200,21 @@
         /* ========== RESPONSIVE DESIGN ========== */
         /* ========== RESPONSIVE DESIGN ========== */
         @media (max-width: 1200px) {
-            .services-grid {
+            .services-wrapper {
+                grid-template-columns: 1fr;
+            }
+            
+            .services-list {
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .project-card {
-                min-width: 350px;
+            .projects-intro {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
             
             .nav-container {
@@ -1045,13 +1290,17 @@
                 font-size: 0.85rem;
             }
             
-            .services-grid {
+            .services-list {
                 grid-template-columns: 1fr;
-                gap: 2rem;
+                gap: 1rem;
             }
             
-            .service-card {
-                padding: 2rem;
+            .services-highlight {
+                text-align: center;
+            }
+            
+            .services-highlight ul {
+                align-items: center;
             }
             
             .why-us-content {
@@ -1137,9 +1386,12 @@
                 font-size: 1rem;
             }
             
-            .project-card {
-                min-width: 100%;
-                height: 280px;
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-figure {
+                min-height: 280px;
             }
             
             .contact-info-box {
@@ -1183,6 +1435,7 @@
             .hero {
                 margin-top: 0;
                 min-height: 80vh;
+                padding: 3.5rem 1.25rem 2.5rem;
             }
             
             .hero::before {
@@ -1193,7 +1446,9 @@
             }
             
             .hero-content {
-                padding: 2rem 1.5rem;
+                padding: 0;
+                max-width: 100%;
+                width: 100%;
                 gap: 1.5rem;
             }
             
@@ -1239,16 +1494,16 @@
                 font-size: 0.75rem;
             }
             
+            .container {
+                padding: 0 1.25rem;
+            }
+            
             .services,
             .projects,
             .why-us,
             .testimonials,
             .contact {
                 padding: 3rem 1.5rem;
-            }
-            
-            .container {
-                padding: 0;
             }
             
             .section-header {
@@ -1269,79 +1524,20 @@
                 font-size: 0.95rem;
             }
             
-            .services-grid {
-                gap: 1.5rem;
+            .services-list {
+                gap: 1rem;
             }
             
-            .service-card {
-                padding: 1.5rem;
-                border-radius: 10px;
+            .service-item {
+                padding: 1.4rem;
             }
             
-            .service-icon {
-                font-size: 2.8rem;
-                margin-bottom: 1rem;
+            .project-figure {
+                border-radius: 14px;
             }
             
-            .service-card h3 {
-                font-size: 1.3rem;
-                margin-bottom: 0.8rem;
-            }
-            
-            .service-card p {
-                font-size: 0.95rem;
-            }
-            
-            .project-card {
-                min-width: 100%;
-                height: 220px;
-                border-radius: 12px;
-            }
-            
-            .project-overlay {
-                padding: 1.5rem;
-            }
-            
-            .project-overlay h3 {
-                font-size: 1.1rem;
-            }
-            
-            .project-overlay p {
-                font-size: 0.85rem;
-            }
-            
-            .modal-image {
-                min-width: 95vw;
-                height: 50vh;
-            }
-            
-            .modal-nav {
-                width: 40px;
-                height: 40px;
-                font-size: 1.3rem;
-            }
-            
-            .modal-nav.prev {
-                left: 10px;
-            }
-            
-            .modal-nav.next {
-                right: 10px;
-            }
-            
-            .modal-close {
-                width: 40px;
-                height: 40px;
-                font-size: 1.3rem;
-                top: -40px;
-            }
-            
-            .modal-info h3 {
-                font-size: 1.4rem;
-            }
-            
-            .modal-info p {
-                font-size: 0.95rem;
+            .before-after-slider {
+                width: 85%;
             }
             
             .why-us-image {
@@ -1517,6 +1713,25 @@
                 padding: 0.8rem 1rem;
             }
             
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .hero {
+                padding: 4rem 1rem 3rem;
+            }
+            
+            .hero-content {
+                padding: 0;
+                max-width: 100%;
+                width: 100%;
+                gap: 1.25rem;
+            }
+            
+            .hero-buttons {
+                gap: 0.6rem;
+            }
+            
             .hero-text h1 {
                 font-size: 1.6rem;
             }
@@ -1538,17 +1753,41 @@
                 font-size: 1.4rem;
             }
             
-            .service-card h3 {
-                font-size: 1.1rem;
+            .services,
+            .projects,
+            .why-us,
+            .testimonials,
+            .contact {
+                padding: 2.5rem 1rem;
             }
             
-            .project-card {
-                min-width: 100%;
-                height: 180px;
+            .section-header {
+                margin-bottom: 2rem;
             }
             
-            .modal-image {
-                height: 40vh;
+            .services-list {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+            
+            .service-item {
+                padding: 1.1rem;
+            }
+            
+            .project-figure {
+                min-height: 220px;
+            }
+            
+            .before-after-inner {
+                height: 240px;
+            }
+            
+            .before-after {
+                padding: 1.5rem;
+            }
+            
+            .before-after-slider {
+                width: 90%;
             }
             
             .why-us-text h2 {
@@ -1592,7 +1831,7 @@
     <!-- HERO SECTION -->
     <section class="hero" id="home">
         <div class="hero-content">
-            <div class="hero-text">
+            <div class="hero-text" data-animate="up">
                 <h1>
                     Building Quality
                     <span>Custom Homes for Your Family</span>
@@ -1604,15 +1843,15 @@
                 </div>
             </div>
             <div class="hero-stats">
-                <div class="stat-item">
+                <div class="stat-item" data-animate="scale" style="--delay: 0.1s;">
                     <span class="stat-number">500+</span>
                     <span class="stat-label">Projects Completed</span>
                 </div>
-                <div class="stat-item">
+                <div class="stat-item" data-animate="scale" style="--delay: 0.2s;">
                     <span class="stat-number">15+</span>
                     <span class="stat-label">Years Experience</span>
                 </div>
-                <div class="stat-item">
+                <div class="stat-item" data-animate="scale" style="--delay: 0.3s;">
                     <span class="stat-number">98%</span>
                     <span class="stat-label">Client Satisfaction</span>
                 </div>
@@ -1623,41 +1862,66 @@
     <!-- SERVICES SECTION -->
     <section class="services" id="services">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" data-animate="up">
                 <span class="section-tag">OUR SERVICES</span>
-                <h2>Comprehensive Construction Solutions</h2>
-                <p>From ground-breaking to final touches, we deliver excellence across all aspects of construction and renovation.</p>
+                <h2>Residential Construction Done Right</h2>
             </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <span class="service-icon">🔨</span>
-                    <h3>Renovation & Remodeling</h3>
-                    <p>Transform your existing space with our expert renovation services. We modernize homes and businesses while maintaining structural integrity.</p>
-                    <a href="#contact" class="service-link">Learn More →</a>
+            <div class="services-wrapper">
+                <div class="services-content" data-animate="left">
+                    <p>Homeowners in New Hampshire trust us for meticulous craftsmanship, clean job sites, and transparent communication. Choose the service that fits your vision and we will tailor a plan around your budget and timeline.</p>
+                    <div class="services-list">
+                        <div class="service-item" data-animate="up" style="--delay: 0.05s;">
+                            <div class="service-pill"><span>🍳</span>Kitchen Remodeling</div>
+                            <p>Custom cabinetry, modern layouts, and high-performance finishes that refresh the heart of your home.</p>
+                            <div class="service-meta">Cabinets · Countertops · Lighting</div>
                 </div>
-                <div class="service-card">
-                    <span class="service-icon">🏢</span>
-                    <h3>Commercial Projects</h3>
-                    <p>Specialized commercial construction including office buildings, retail spaces, warehouses, and multi-unit developments.</p>
-                    <a href="#contact" class="service-link">Learn More →</a>
+                        <div class="service-item" data-animate="up" style="--delay: 0.1s;">
+                            <div class="service-pill"><span>🛁</span>Bathroom Remodeling</div>
+                            <p>From efficient refreshes to spa-level suites, we deliver elevated comfort and style.</p>
+                            <div class="service-meta">Tile · Plumbing · Fixtures</div>
                 </div>
-                <div class="service-card">
-                    <span class="service-icon">🏠</span>
-                    <h3>Residential Building</h3>
-                    <p>Custom home construction and residential developments. We create dream homes tailored to your lifestyle and preferences.</p>
-                    <a href="#contact" class="service-link">Learn More →</a>
+                        <div class="service-item" data-animate="up" style="--delay: 0.15s;">
+                            <div class="service-pill"><span>➕</span>Additions</div>
+                            <p>Seamlessly expand your square footage with thoughtfully engineered additions.</p>
+                            <div class="service-meta">Bedrooms · Offices · Sunrooms</div>
                 </div>
-                <div class="service-card">
-                    <span class="service-icon">🛠️</span>
-                    <h3>Repairs & Maintenance</h3>
-                    <p>Professional repair services and ongoing maintenance to keep your property in optimal condition year-round.</p>
-                    <a href="#contact" class="service-link">Learn More →</a>
+                        <div class="service-item" data-animate="up" style="--delay: 0.2s;">
+                            <div class="service-pill"><span>🏡</span>New Construction</div>
+                            <p>Ground-up builds that balance design taste and enduring structural integrity.</p>
+                            <div class="service-meta">Design-Build · Permitting · Finishes</div>
                 </div>
-                <div class="service-card">
-                    <span class="service-icon">📐</span>
-                    <h3>Design & Planning</h3>
-                    <p>Comprehensive project planning, architectural design, and engineering consultation to bring your vision to reality.</p>
-                    <a href="#contact" class="service-link">Learn More →</a>
+                        <div class="service-item" data-animate="up" style="--delay: 0.25s;">
+                            <div class="service-pill"><span>🪵</span>Decks & Patios</div>
+                            <p>Outdoor living upgrades with long-lasting materials and detailed carpentry.</p>
+                            <div class="service-meta">Composite · Pressure Treated · Railings</div>
+                </div>
+                        <div class="service-item" data-animate="up" style="--delay: 0.3s;">
+                            <div class="service-pill"><span>🚪</span>Doors & Windows</div>
+                            <p>Energy-efficient replacements that enhance curb appeal and comfort.</p>
+                            <div class="service-meta">Entry · Sliding · Picture Windows</div>
+                        </div>
+                        <div class="service-item" data-animate="up" style="--delay: 0.35s;">
+                            <div class="service-pill"><span>🪚</span>Custom Carpentry</div>
+                            <p>Built-ins, trim, and specialty woodworking to elevate every detail.</p>
+                            <div class="service-meta">Built-ins · Trim · Mantels</div>
+                        </div>
+                        <div class="service-item" data-animate="up" style="--delay: 0.4s;">
+                            <div class="service-pill"><span>🛠️</span>Repair Services</div>
+                            <p>Reliable maintenance and punch-list completion to protect your investment.</p>
+                            <div class="service-meta">Rot Repair · Storm Damage · Upkeep</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="services-highlight" data-animate="right">
+                    <h3>Quality You Can Count On</h3>
+                    <p>We Spofford Construction LLC promise of honest communication, tidy workspaces, and a finish you will be proud to show off.</p>
+                    <ul>
+                        <li>✔ Licensed & insured</li>
+                        <li>✔ Decade of regional experience</li>
+                        <li>✔ Transparent schedules & budgets</li>
+                        <li>✔ Premium materials & partners</li>
+                    </ul>
+                    <button class="services-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Schedule A Consultation</button>
                 </div>
             </div>
         </div>
@@ -1666,73 +1930,96 @@
     <!-- PROJECTS SHOWCASE -->
     <section class="projects" id="projects">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" data-animate="up">
                 <span class="section-tag">OUR PORTFOLIO</span>
-                <h2>Featured Projects</h2>
-                <p>Explore our recent completed projects showcasing quality workmanship and innovative construction solutions.</p>
+                <h2>Our Latest Work</h2>
+                <p>We highlight recent remodels, additions, and custom exteriors to showcase the craftsmanship we bring to every job.</p>
             </div>
-            <div class="projects-container">
-                <div class="projects-slider" id="projectsSlider">
-                    <div class="project-card" data-project="0">
-                        <div class="project-image">[Custom Home Image 1]</div>
-                        <div class="project-overlay">
-                            <h3>Modern Family Home</h3>
-                            <p>3,500 sq ft custom home with open floor plan and premium finishes.</p>
+            <div class="projects-intro" data-animate="up" style="--delay: 0.1s;">
+                <p>Each transformation pairs thoughtful planning with premium materials. Tap any project to open a gallery-style window, then flip through detailed progress and reveal shots.</p>
+                        </div>
+            <div class="projects-grid">
+                <div class="project-figure" data-project="0" role="button" tabindex="0" aria-label="Open gallery for Weaverville Residence" data-animate="up" style="--delay: 0.05s;">
+                    <div class="project-visual">
+                        <span>Modern Farmhouse Exterior</span>
+                        <span class="project-badge">New Build</span>
+                    </div>
+                    <div class="project-meta">
+                        <h3>Weaverville Residence</h3>
+                        <p>3,200 sq ft farmhouse with board-and-batten siding, standing seam roofing, and covered porches.</p>
+                        <span>Completed · 2025</span>
+                        <span class="gallery-btn">View Gallery →</span>
                         </div>
                     </div>
-                    <div class="project-card" data-project="1">
-                        <div class="project-image">[Kitchen Remodel Image]</div>
-                        <div class="project-overlay">
-                            <h3>Luxury Kitchen Renovation</h3>
-                            <p>Complete kitchen transformation with custom cabinetry and modern appliances.</p>
+                <div class="project-figure" data-project="1" role="button" tabindex="0" aria-label="Open gallery for Marble Ridge Kitchen" data-animate="up" style="--delay: 0.1s;">
+                    <div class="project-visual">
+                        <span>Gourmet Kitchen Upgrade</span>
+                        <span class="project-badge">Kitchen</span>
+                        </div>
+                    <div class="project-meta">
+                        <h3>Marble Ridge Kitchen</h3>
+                        <p>Full gut renovation with inset cabinetry, quartz surfaces, and hidden pantry storage.</p>
+                        <span>Completed · 2025</span>
+                        <span class="gallery-btn">View Gallery →</span>
+                    </div>
+                        </div>
+                <div class="project-figure" data-project="2" role="button" tabindex="0" aria-label="Open gallery for Blue Ridge Deck" data-animate="up" style="--delay: 0.15s;">
+                    <div class="project-visual">
+                        <span>Outdoor Living Suite</span>
+                        <span class="project-badge">Deck</span>
+                    </div>
+                    <div class="project-meta">
+                        <h3>Blue Ridge Deck</h3>
+                        <p>Custom composite deck with integrated benching, cable rail, and low-voltage accent lighting.</p>
+                        <span>Completed · 2024</span>
+                        <span class="gallery-btn">View Gallery →</span>
                         </div>
                     </div>
-                    <div class="project-card" data-project="2">
-                        <div class="project-image">[Deck Construction Image]</div>
-                        <div class="project-overlay">
-                            <h3>Outdoor Living Space</h3>
-                            <p>Beautiful composite deck with built-in seating and lighting.</p>
+                <div class="project-figure" data-project="3" role="button" tabindex="0" aria-label="Open gallery for Biltmore Spa Suite" data-animate="up" style="--delay: 0.2s;">
+                    <div class="project-visual">
+                        <span>Primary Bath Retreat</span>
+                        <span class="project-badge">Bathroom</span>
                         </div>
+                    <div class="project-meta">
+                        <h3>Biltmore Spa Suite</h3>
+                        <p>Curbless shower, freestanding tub, heated tile floors, and custom white oak vanity.</p>
+                        <span>Completed · 2024</span>
+                        <span class="gallery-btn">View Gallery →</span>
                     </div>
-                    <div class="project-card" data-project="3">
-                        <div class="project-image">[Commercial Building Image]</div>
-                        <div class="project-overlay">
-                            <h3>Office Building Renovation</h3>
-                            <p>Complete commercial space remodel with modern amenities.</p>
-                        </div>
+            </div>
+        </div>
+            <div class="before-after" data-animate="up" style="--delay: 0.25s;">
+                <div class="before-after-header">
+                    <div>
+                        <h3>Before & After Spotlight</h3>
+                        <p>Slide the handle to compare the dramatic difference on a recent kitchen remodel.</p>
                     </div>
-                    <div class="project-card" data-project="4">
-                        <div class="project-image">[Home Addition Image]</div>
-                        <div class="project-overlay">
-                            <h3>Two-Story Addition</h3>
-                            <p>Seamless home expansion adding 1,200 sq ft of living space.</p>
-                        </div>
-                    </div>
-                    <div class="project-card" data-project="5">
-                        <div class="project-image">[Bathroom Remodel Image]</div>
-                        <div class="project-overlay">
-                            <h3>Master Bathroom Suite</h3>
-                            <p>Spa-like bathroom featuring marble tile and custom fixtures.</p>
-                        </div>
-                    </div>
+                    <strong>Kitchen Gut Renovation · Asheville, NC</strong>
+                </div>
+                <div class="before-after-inner" id="beforeAfter" style="--slider-position:50%;">
+                    <div class="before-after-image before"><span>Before</span></div>
+                    <div class="before-after-image after"><span>After</span></div>
+                    <div class="before-after-handle"></div>
+                    <input type="range" min="10" max="90" value="50" class="before-after-slider" aria-label="Before and after slider" data-target="#beforeAfter">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PROJECT MODAL -->
-    <div class="project-modal" id="projectModal">
-        <div class="modal-content">
-            <button class="modal-close" id="modalClose">×</button>
-            <button class="modal-nav prev" id="modalPrev">‹</button>
-            <button class="modal-nav next" id="modalNext">›</button>
-            <div class="modal-slider" id="modalSlider">
-                <!-- Images will be loaded here dynamically -->
+    <!-- PROJECT GALLERY MODAL -->
+    <div class="project-modal" id="projectModal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <button class="modal-close" id="modalClose" aria-label="Close project gallery">×</button>
+            <div class="modal-header">
+                <h3 id="modalTitle"></h3>
+                <p id="modalSubtitle"></p>
             </div>
-            <div class="modal-info" id="modalInfo">
-                <h3></h3>
-                <p></p>
+            <div class="modal-gallery">
+                <button class="modal-nav prev" id="modalPrev" aria-label="Previous photo">‹</button>
+                <div class="modal-image" id="modalImage">Image</div>
+                <button class="modal-nav next" id="modalNext" aria-label="Next photo">›</button>
             </div>
+            <div class="modal-thumbs" id="modalThumbs"></div>
         </div>
     </div>
 
@@ -1740,10 +2027,10 @@
     <section class="why-us" id="about">
         <div class="container">
             <div class="why-us-content">
-                <div class="why-us-image">
+                <div class="why-us-image" data-animate="left">
                     [Construction Team Image Placeholder]
                 </div>
-                <div class="why-us-text">
+                <div class="why-us-text" data-animate="right">
                     <span class="section-tag">WHY CHOOSE US</span>
                     <h2>Building Excellence Through Experience</h2>
                     <ul class="feature-list">
@@ -1784,59 +2071,26 @@
     <!-- TESTIMONIALS -->
     <section class="testimonials">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" data-animate="up">
                 <span class="section-tag">TESTIMONIALS</span>
-                <h2>What Our Clients Say</h2>
-                <p>Don't just take our word for it—hear from satisfied clients who've experienced our commitment to excellence.</p>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="testimonial-text">"BuildPro transformed our outdated office into a modern workspace. Their attention to detail and professionalism exceeded our expectations. Highly recommend!"</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">JD</div>
-                        <div class="author-info">
-                            <h5>John Davidson</h5>
-                            <p>CEO, Tech Solutions Inc.</p>
-                        </div>
-                    </div>
+                <!-- Elfsight All-in-One Reviews | Untitled All-in-One Reviews -->
                 </div>
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="testimonial-text">"From design to completion, BuildPro made our dream home a reality. The team was responsive, skilled, and delivered exceptional quality work."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">SM</div>
-                        <div class="author-info">
-                            <h5>Sarah Mitchell</h5>
-                            <p>Homeowner</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="testimonial-text">"Outstanding construction services! They completed our commercial project ahead of schedule and within budget. True professionals in every sense."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">RJ</div>
-                        <div class="author-info">
-                            <h5>Robert Johnson</h5>
-                            <p>Property Developer</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <script src="https://elfsightcdn.com/platform.js" async></script>
+                <div class="elfsight-app-cbcc22e2-912d-4349-8e5d-a0253f6b7f7d" data-elfsight-app-lazy></div>
+            
         </div>
     </section>
 
     <!-- CONTACT SECTION -->
     <section class="contact" id="contact">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" data-animate="up">
                 <span class="section-tag">GET IN TOUCH</span>
                 <h2>Start Your Project Today</h2>
                 <p>Ready to build something amazing? Contact us for a free consultation and quote.</p>
             </div>
             <div class="contact-wrapper">
-                <div class="contact-info-box">
+                <div class="contact-info-box" data-animate="left">
                     <h3>Let's Discuss Your Project</h3>
                     <p>Our team is ready to help you bring your construction vision to life. Reach out today for expert guidance and competitive pricing.</p>
                     
@@ -1844,15 +2098,15 @@
                         <div class="info-icon">📍</div>
                         <div class="info-text">
                             <strong>Visit Our Office</strong>
-                            <span>Franklin, NH 03235<br>United States</span>
+                            <span>46 Park Street<br>Franklin, NH 03235</span>
                         </div>
                     </div>
                     
                     <div class="info-item">
                         <div class="info-icon">📞</div>
                         <div class="info-text">
-                            <strong>Call Us</strong>
-                            <span>Contact for quote<br>Mon-Fri: 7AM - 6PM<br>Sat: 8AM - 2PM</span>
+                            <strong>Call Us At</strong>
+                            <span>+1 603-341-0946<br>Mon-Fri: 7AM - 6PM<br>Sat: 8AM - 2PM</span>
                         </div>
                     </div>
                     
@@ -1860,12 +2114,12 @@
                         <div class="info-icon">✉️</div>
                         <div class="info-text">
                             <strong>Email Us</strong>
-                            <span>info@spoffordconstruction.com</span>
+                            <span>spoffordconstructionllc1@gmail.com</span>
                         </div>
                     </div>
                 </div>
                 
-                <form class="contact-form" id="contactForm">
+               <form class="contact-form" id="contactForm" data-animate="right" action="send_mail.php" method="POST">
                     <h3>Request a Free Quote</h3>
                     <div class="form-row">
                         <div class="form-group">
@@ -1907,20 +2161,30 @@
                     <button type="submit" class="submit-btn">Get Free Quote</button>
                 </form>
             </div>
+            <div class="map-wrapper" data-animate="up" style="--delay: 0.2s;">
+                <iframe
+                    title="Spofford Construction Location"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2824.949152831642!2d-71.65562522353679!3d43.447823971105214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cb442bd8aea685b%3A0x1b0aff14ed59cd8!2s46%20Park%20St%2C%20Franklin%2C%20NH%2003235%2C%20USA!5e0!3m2!1sen!2sus!4v1732032000000!5m2!1sen!2sus"
+                    width="100%"
+                    height="420"
+                    style="border:0; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.1);"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
-        <div class="footer-content">
+        <div class="footer-content" data-animate="up">
             <div class="footer-about">
                 <h3>Spofford Construction LLC</h3>
                 <p>Leading construction company in Franklin, NH delivering excellence in building, renovation, and contracting services. With over 15 years of experience, we're your trusted partner in construction.</p>
                 <div class="social-links">
-                    <a href="#" aria-label="Facebook">f</a>
-                    <a href="#" aria-label="Twitter">𝕏</a>
-                    <a href="#" aria-label="LinkedIn">in</a>
-                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="https://www.facebook.com/profile.php?id=100087469335763" aria-label="Facebook" class="social-icon"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                    <a href="https://www.yelp.com/biz/spofford-construction-franklin-2" aria-label="Yelp" class="social-icon"><i class="fa-brands fa-yelp" aria-hidden="true"></i></a>
+                    <a href="https://www.google.com/maps/place/Spofford+Construction+LLC/@43.5516965,-71.566109,8z/data=!3m1!4b1!4m6!3m5!1s0x89e20b4afa251d4b:0x6bbcfc53e598634b!8m2!3d43.5516965!4d-71.566109!16s%2Fg%2F11ynp954r6?hl=fr&entry=ttu&g_ep=EgoyMDI1MTExNi4wIKXMDSoASAFQAw%3D%3D" aria-label="Google Maps" class="social-icon"><i class="fa-brands fa-google" aria-hidden="true"></i></a>
                 </div>
             </div>
             
@@ -1938,11 +2202,14 @@
             <div class="footer-section">
                 <h4>Services</h4>
                 <ul>
+                    <li><a href="#services">Kitchen Remodeling</a></li>
+                    <li><a href="#services">Bathroom Remodeling</a></li>
+                    <li><a href="#services">Additions</a></li>
                     <li><a href="#services">New Construction</a></li>
-                    <li><a href="#services">Renovation</a></li>
-                    <li><a href="#services">Commercial Projects</a></li>
-                    <li><a href="#services">Residential Building</a></li>
-                    <li><a href="#services">Design & Planning</a></li>
+                    <li><a href="#services">Doors & Windows</a></li>
+                    <li><a href="#services">Decks & Patios</a></li>
+                    <li><a href="#services">Custom Carpentry</a></li>
+                    <li><a href="#services">Repair Services</a></li>
                 </ul>
             </div>
             
@@ -1959,77 +2226,54 @@
         </div>
         
         <div class="footer-bottom">
-            <p>&copy; 2025 Spofford Construction LLC. All Rights Reserved. | <a href="#" style="color: rgba(255,255,255,0.6);">Privacy Policy</a> | <a href="#" style="color: rgba(255,255,255,0.6);">Terms of Service</a></p>
+            <p>&copy; 2025 Spofford Construction LLC. All Rights Reserved. </p>
         </div>
     </footer>
 
     <script>
-        // Project data with multiple images
         const projectsData = [
             {
-                title: 'Modern Family Home',
-                description: '3,500 sq ft custom home with open floor plan and premium finishes.',
+                title: 'Home Renovation',
+                subtitle: 'Home renovation · Weaverville, NC',
                 images: [
-                    '[Front Exterior View]',
-                    '[Living Room Interior]',
-                    '[Kitchen View]',
-                    '[Master Bedroom]',
-                    '[Backyard View]'
+                    'assets/images/Home-Renovation1.jpg',
+                    'Great Room Beam Detail',
+                    'Chef Kitchen Finish',
+                    'Covered Back Porch',
+                    'Owner Suite Retreat'
                 ]
             },
             {
-                title: 'Luxury Kitchen Renovation',
-                description: 'Complete kitchen transformation with custom cabinetry and modern appliances.',
+                title: 'Marble Ridge Kitchen',
+                subtitle: 'Kitchen gut renovation · Asheville, NC',
                 images: [
-                    '[Kitchen Before]',
-                    '[Kitchen After - Main View]',
-                    '[Kitchen Island Detail]',
-                    '[Custom Cabinetry]',
-                    '[Lighting and Fixtures]'
+                    'Before Layout',
+                    'After – Island View',
+                    'Inset Cabinetry',
+                    'Hidden Pantry Entry',
+                    'Appliance Wall'
                 ]
             },
             {
-                title: 'Outdoor Living Space',
-                description: 'Beautiful composite deck with built-in seating and lighting.',
+                title: 'Blue Ridge Deck',
+                subtitle: 'Outdoor living upgrade · Mars Hill, NC',
                 images: [
-                    '[Deck Overview]',
-                    '[Built-in Seating]',
-                    '[Lighting at Night]',
-                    '[Railing Detail]',
-                    '[Connection to Home]'
+                    'Deck Overview',
+                    'Built-in Bench Seating',
+                    'Cable Rail Detail',
+                    'Under-Rail Lighting',
+                    'Stairs To Yard'
                 ]
             },
             {
-                title: 'Office Building Renovation',
-                description: 'Complete commercial space remodel with modern amenities.',
+                title: 'Biltmore Spa Suite',
+                subtitle: 'Primary bathroom remodel · Biltmore Forest, NC',
                 images: [
-                    '[Building Exterior]',
-                    '[Lobby Area]',
-                    '[Office Space 1]',
-                    '[Office Space 2]',
-                    '[Conference Room]'
-                ]
-            },
-            {
-                title: 'Two-Story Addition',
-                description: 'Seamless home expansion adding 1,200 sq ft of living space.',
-                images: [
-                    '[Addition Exterior]',
-                    '[New Living Area]',
-                    '[Upstairs Bedroom]',
-                    '[Bathroom Addition]',
-                    '[Staircase Detail]'
-                ]
-            },
-            {
-                title: 'Master Bathroom Suite',
-                description: 'Spa-like bathroom featuring marble tile and custom fixtures.',
-                images: [
-                    '[Bathroom Overview]',
-                    '[Custom Vanity]',
-                    '[Walk-in Shower]',
-                    '[Soaking Tub]',
-                    '[Tile Detail]'
+                    'Before Snapshot',
+                    'After – Vanity Wall',
+                    'Curbless Shower',
+                    'Soaking Tub Niche',
+                    'Heated Tile Floor'
                 ]
             }
         ];
@@ -2049,46 +2293,67 @@
             });
         });
 
-        // Project Modal Functionality
+        // Project gallery modal logic
+        const projectCards = document.querySelectorAll('.project-figure');
         const projectModal = document.getElementById('projectModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalSubtitle = document.getElementById('modalSubtitle');
+        const modalImage = document.getElementById('modalImage');
+        const modalThumbs = document.getElementById('modalThumbs');
         const modalClose = document.getElementById('modalClose');
-        const modalSlider = document.getElementById('modalSlider');
-        const modalInfo = document.getElementById('modalInfo');
         const modalPrev = document.getElementById('modalPrev');
         const modalNext = document.getElementById('modalNext');
-        const projectCards = document.querySelectorAll('.project-card');
-
-        let currentProject = 0;
-
-        // Open modal when project card is clicked
+        
+        let currentProjectIndex = 0;
+        let currentImageIndex = 0;
+        
+        const renderModal = () => {
+            const project = projectsData[currentProjectIndex];
+            modalTitle.textContent = project.title;
+            modalSubtitle.textContent = project.subtitle;
+            modalImage.textContent = project.images[currentImageIndex];
+            
+            modalThumbs.innerHTML = '';
+            project.images.forEach((imgLabel, index) => {
+                const thumb = document.createElement('button');
+                thumb.type = 'button';
+                thumb.className = `modal-thumb${index === currentImageIndex ? ' active' : ''}`;
+                thumb.textContent = imgLabel;
+                thumb.addEventListener('click', () => {
+                    currentImageIndex = index;
+                    renderModal();
+                });
+                modalThumbs.appendChild(thumb);
+            });
+        };
+        
+        const openModal = (projectIndex) => {
+            currentProjectIndex = projectIndex;
+            currentImageIndex = 0;
+            renderModal();
+            projectModal.classList.add('active');
+            projectModal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        };
+        
+        const closeModal = () => {
+            projectModal.classList.remove('active');
+            projectModal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = 'auto';
+        };
+        
         projectCards.forEach(card => {
-            card.addEventListener('click', () => {
-                currentProject = parseInt(card.getAttribute('data-project'));
-                openModal(currentProject);
+            const projectIndex = parseInt(card.getAttribute('data-project'), 10);
+            const openHandler = () => openModal(projectIndex);
+            card.addEventListener('click', openHandler);
+            card.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openHandler();
+                }
             });
         });
-
-        function openModal(projectIndex) {
-            const project = projectsData[projectIndex];
-            
-            // Update modal info
-            modalInfo.querySelector('h3').textContent = project.title;
-            modalInfo.querySelector('p').textContent = project.description;
-            
-            // Clear and populate slider
-            modalSlider.innerHTML = '';
-            project.images.forEach(image => {
-                const imgDiv = document.createElement('div');
-                imgDiv.className = 'modal-image';
-                imgDiv.textContent = image;
-                modalSlider.appendChild(imgDiv);
-            });
-            
-            projectModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Close modal
+        
         modalClose.addEventListener('click', closeModal);
         projectModal.addEventListener('click', (e) => {
             if (e.target === projectModal) {
@@ -2096,25 +2361,20 @@
             }
         });
 
-        function closeModal() {
-            projectModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Navigate between projects
         modalPrev.addEventListener('click', () => {
-            currentProject = (currentProject - 1 + projectsData.length) % projectsData.length;
-            openModal(currentProject);
+            const projectImages = projectsData[currentProjectIndex].images;
+            currentImageIndex = (currentImageIndex - 1 + projectImages.length) % projectImages.length;
+            renderModal();
         });
 
         modalNext.addEventListener('click', () => {
-            currentProject = (currentProject + 1) % projectsData.length;
-            openModal(currentProject);
+            const projectImages = projectsData[currentProjectIndex].images;
+            currentImageIndex = (currentImageIndex + 1) % projectImages.length;
+            renderModal();
         });
 
-        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
-            if (projectModal.classList.contains('active')) {
+            if (!projectModal.classList.contains('active')) return;
                 if (e.key === 'Escape') {
                     closeModal();
                 } else if (e.key === 'ArrowLeft') {
@@ -2122,7 +2382,40 @@
                 } else if (e.key === 'ArrowRight') {
                     modalNext.click();
                 }
-            }
+        });
+
+        // Scroll-triggered animations
+        const animatedElements = document.querySelectorAll('[data-animate]');
+        if ('IntersectionObserver' in window) {
+            const animationObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.25,
+                rootMargin: '0px 0px -60px 0px'
+            });
+            
+            animatedElements.forEach(el => animationObserver.observe(el));
+        } else {
+            animatedElements.forEach(el => el.classList.add('in-view'));
+        }
+
+        // Before & After slider interaction
+        document.querySelectorAll('.before-after-slider').forEach(slider => {
+            const targetSelector = slider.dataset.target;
+            const sliderTarget = document.querySelector(targetSelector);
+            if (!sliderTarget) return;
+            const updateSlider = (value) => {
+                sliderTarget.style.setProperty('--slider-position', `${value}%`);
+            };
+            updateSlider(slider.value);
+            slider.addEventListener('input', (event) => {
+                updateSlider(event.target.value);
+            });
         });
         
         // Form Validation
@@ -2225,9 +2518,11 @@
                 }
             });
         });
+        
     </script>
 <script src="https://cdn.commoninja.com/sdk/latest/commonninja.js" defer></script>
 <div class="commonninja_component pid-df3ed4a8-3b54-43e4-a090-b36d5a204a48"></div>
 
 </body>
+</html>
 </html>
